@@ -1,14 +1,14 @@
 <template>
-  <CochesComponent></CochesComponent>
+  <MenuComponents></MenuComponents>
 </template>
 
 <script>
-import CochesComponent from './components/CochesComponent.vue';
 
+import MenuComponents from './components/MenuComponents.vue';
 export default {
   name: 'App',
   components: {
-    CochesComponent
+    MenuComponents
   }
 }
 </script>
