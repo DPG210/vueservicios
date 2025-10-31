@@ -28,4 +28,17 @@ export default class ServiceEmpleados {
             })
         })
     }
+    getOficios(oficio) {
+        return new Promise(function (resolve) {
+            var request = "api/Empleados/EmpleadosOficio/" + oficio;
+
+            var empleados = [];
+
+            axios.get(Global.urlApiEmpleados + request).then(response => {
+                console.log("Detalles empleado")
+                empleados = response.data;
+                resolve(empleados);
+            })
+        })
+    }
 }
