@@ -27,17 +27,23 @@
         </li>
 
         <li class="nav-item dropdown">
-          <a
-            class="nav-link dropdown-toggle"
-            href="#"
-            id="navbarDropdown"
-            role="button"
-            data-bs-toggle="dropdown"
-            aria-expanded="false"
-          >
-            Dropdown
-          </a>
-        </li>
+        <a
+          class="nav-link dropdown-toggle"
+          href="#"
+          id="navbarDropdown"
+          role="button"
+          data-bs-toggle="dropdown"
+          aria-expanded="false"
+        >
+          Oficios
+        </a>
+        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <li v-for="oficio in oficios" :key="oficio">
+            <router-link class="dropdown-item" :to="'/empleadosoficios/'+oficio">{{ oficio }}</router-link>
+          </li>
+          
+        </ul>
+      </li>
       </ul>
     </div>
   </nav>
@@ -45,7 +51,31 @@
 </template>
 
 <script>
+import Global from '@/Global';
+import axios from 'axios';
+let url=Global.urlApiEmpleados
     export default{
-        name:"MenuComponents"
+        name:"MenuComponents",
+        data(){
+          return{
+            oficios:[]
+          }
+          
+        },
+        methods:{
+          generarOficios(){
+            var request="api/empleados/oficios"
+
+            axios.get(url+request).then(response=>{
+              console.log("Cargando oficios")
+              this.oficios=response.data            
+            })
+          }
+        },
+        mounted(){
+          
+          this.generarOficios();
+
+        }
     }
 </script>
