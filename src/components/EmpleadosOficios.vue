@@ -1,8 +1,8 @@
 <template>
     <div>
-        <h1>Triste h1 {{ oficio }}</h1>
+        <h1>{{ oficio }}</h1>
         <table style="margin:auto;width: 60%;" class="table table-dark">
-            <thead>
+            <thead class="table table-info">
                 <tr>
                     <th>ID</th>
                     <th>Apellido</th>

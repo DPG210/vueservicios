@@ -13,13 +13,24 @@
             <h2>{{ empleado.salario }}</h2>
             <h4>{{ empleado.departamento }}</h4>
         </div>
+        <table style="margin:auto;width:60%" class="table table-info">
+            <tbody>
+                <tr v-for="emp in empleados" :key="emp">
+                    <td>{{ emp.apellido }}</td>
+                    <td>{{ emp.oficio }}</td>
+                    <td>{{ emp.salario }}</td>
+                    <td>{{ emp.departamento }}</td>
+                </tr>
+            </tbody>
+        </table>
     </div>
 </template>
 
 <script>
-import axios from 'axios';
-import Global from '@/Global';
-let urlApi=Global.urlApiEmpleados
+
+import ServiceEmpleados from '@/services/ServiceEmpleados';
+const service= new ServiceEmpleados();
+
     export default{
         name:"EmpleadosDetails",
         data(){
@@ -31,22 +42,14 @@ let urlApi=Global.urlApiEmpleados
         },
         methods:{
             mostrarDetalles(){
-                var id=this.idEmpleado
-
-                var request="api/empleados/"+id;
-
-                axios.get(urlApi+request).then(response=>{
-                    console.log("Detalles del empleado");
-                    this.empleado=response.data
+                service.getDetallesEmpleado(this.idEmpleado).then(result=>{
+                    this.empleado=result;
                 })
             }
         },
         mounted(){
-            var request="api/empleados"
-
-            axios.get(urlApi+request).then(response=>{
-                console.log("Dentro de empleados")
-                this.empleados=response.data
+            service.getEmpleados().then(result=>{
+                this.empleados=result;
             })
         }
     }
